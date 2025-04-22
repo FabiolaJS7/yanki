@@ -1,8 +1,155 @@
 services:
+  discovery-service:
+    build:
+      context: ./discovery-service # Ruta donde está el Dockerfile del config-server
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    ports:
+      - "8761:8761" # Mapea el puerto 8761 del contenedor al puerto 8761 de tu máquina local
+    networks:
+      - app-network
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_REGISTER_WITH_EUREKA: false
+      EUREKA_CLIENT_FETCH_REGISTRY: false
+
+  config-server-bc:
+    build:
+      context: ./config-server-bc # Ruta donde está el Dockerfile del config-server
+      dockerfile: Dockerfile
+    container_name: config-server-bc
+    ports:
+      - "8888:8888" # Mapea el puerto 8888 del contenedor al puerto 8888 de tu máquina local
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8989:8989"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  business-service:
+    build:
+      context: ./business-service
+      dockerfile: Dockerfile
+    container_name: business-service
+    ports:
+      - "8585:8585"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  service-product:
+    build:
+      context: ./service-product
+      dockerfile: Dockerfile
+    container_name: service-product
+    ports:
+      - "8383:8383"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  service-customer:
+    build:
+      context: ./service-customer
+      dockerfile: Dockerfile
+    container_name: service-customer
+    ports:
+      - "8282:8282"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  service-transaction:
+    build:
+      context: ./service-transaction
+      dockerfile: Dockerfile
+    container_name: service-transaction
+    ports:
+      - "8484:8484"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  service-finance:
+    build:
+      context: ./service-finance
+      dockerfile: Dockerfile
+    container_name: service-finance
+    ports:
+      - "8686:8686"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
+  resume-balance-bot:
+    build:
+      context: ./resume-balance-bot
+      dockerfile: Dockerfile
+    container_name: resume-balance-bot
+    ports:
+      - "8787:8787"
+    networks:
+      - app-network
+    depends_on:
+      - config-server-bc
+      - discovery-service
+      - api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
   zookeeper:
     image: wurstmeister/zookeeper:latest
     networks:
-      - kafka-network
+      - app-network
     container_name: zookeeper
     ports:
       - "2181:2181"
@@ -14,7 +161,7 @@ services:
     image: wurstmeister/kafka:latest
     container_name: kafka
     networks:
-      - kafka-network
+      - app-network
     ports:
       - "9092:9092"
     environment:
@@ -30,7 +177,7 @@ services:
     image: provectuslabs/kafka-ui:latest
     container_name: kafka-ui
     networks:
-      - kafka-network
+      - app-network
     ports:
       - "8080:8080"
     environment:
@@ -41,20 +188,35 @@ services:
 
   yanki-service:
     build:
-      context: ..
+      context: ../Yanki/yanki-service
       dockerfile: Dockerfile
     container_name: yanki-service
     networks:
-      - kafka-network
+      - app-network
     ports:
-      - "9494:9494" # Mapea el puerto del contenedor al host
+      - "9494:9494"
     environment:
-      SPRING_PROFILES_ACTIVE: docker # Configura el perfil activo de Spring
+      SPRING_PROFILES_ACTIVE: local # Configura el perfil activo de Spring
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+    depends_on:
+      - kafka
+
+  users-service-api:
+    build:
+      context: ../Yanki/users-service-api
+      dockerfile: Dockerfile
+    container_name: users-service-api
+    networks:
+      - app-network
+    ports:
+      - "9191:9191" # Mapea el puerto del contenedor al host
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Configura el perfil activo de Spring
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     depends_on:
       - kafka
 
-
 networks:
-  kafka-network:
+  app-network:
     driver: bridge

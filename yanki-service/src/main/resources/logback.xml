@@ -9,7 +9,7 @@
 
     <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>
-            service-finance.log
+            yanki-service.log
         </file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>yanki-service-%d{yyyy-MM-dd}.%i.log</fileNamePattern>

@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/movements-service-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/users-service-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wallet-service-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yanki-api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yanki-service/src/main/java" charset="UTF-8" />
   </component>
 </project>

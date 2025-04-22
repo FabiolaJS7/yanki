@@ -1,4 +1,4 @@
-package com.yanki.users.service.api.bean;
+package com.yanki.service.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

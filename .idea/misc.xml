@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/wallet-service-api/pom.xml" />
         <option value="$PROJECT_DIR$/movements-service-api/pom.xml" />
         <option value="$PROJECT_DIR$/yanki-service/pom.xml" />
+        <option value="$PROJECT_DIR$/yanki-api-gateway/pom.xml" />
       </list>
     </option>
   </component>
