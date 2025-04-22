@@ -34,4 +34,12 @@ public class WalletServiceImpl implements WalletService {
                         .map(WalletMapper.INSTANCE::getWalletResponseFromWalletModel)
                         .doOnSuccess(walletResponse -> log.info("Created yanki wallet respose")));
     }
+
+    @Override
+    public Single<WalletResponse> findWalletByPhone(String phoneNumber) {
+        return daoWalletFactory.getWalletRepository().findWalletModelByUserId(phoneNumber)
+                .doOnSubscribe(disposable -> log.info("Subscribed to yanki wallet request"))
+                .doOnSuccess(walletResponse -> log.info("Found yanki wallet respose"))
+                .doOnError(throwable -> log.error("Error finding yanki wallet respose", throwable.getMessage()));
+    }
 }

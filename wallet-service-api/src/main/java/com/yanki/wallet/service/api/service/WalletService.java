@@ -7,4 +7,5 @@ import io.reactivex.rxjava3.core.Single;
 public interface WalletService {
 
     Single<WalletResponse> createWallet(Single<WalletRequest> walletRequest);
+    Single<WalletResponse> findWalletByPhone(String phoneNumber);
 }
