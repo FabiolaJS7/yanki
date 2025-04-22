@@ -1,0 +1,101 @@
+openapi: "3.0.1"
+info:
+  title: Yanki user service API
+  description: API of finance-service
+  version: 1.0.0
+servers:
+  - url: http://localhost:9191
+    description: local server
+paths:
+  /api/yanki/users:
+    post:
+      summary: Create new yanki user
+      operationId: createUser
+      requestBody:
+        description: Request to save new yanki user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/YankiUserRequest"
+      responses:
+        '200':
+          description: Success create
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/YankiUserResponse"
+  /api/yanki/users/{identificationNumber}:
+    get:
+      summary: Get yanki user  by identification.
+      operationId: getUserByIdentification
+      parameters:
+        - name: identificationNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/YankiUserResponse"
+        '404':
+          description: Yanki user not found
+
+components:
+  schemas:
+    YankiUserRequest:
+      type: object
+      properties:
+        identificationType:
+          type: string
+        identificationNumber:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        imeiNumber:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    YankiUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        identificationType:
+          type: string
+        identificationNumber:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        imeiNumber:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
