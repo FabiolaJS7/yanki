@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.adapter.rxjava.RxJava3Adapter;
 
+import java.time.LocalDate;
+
 @Service
 @Slf4j
 public class WalletServiceImpl implements WalletService {
@@ -21,6 +23,11 @@ public class WalletServiceImpl implements WalletService {
     public Single<WalletResponse> createWallet(Single<WalletRequest> walletRequest) {
         return walletRequest
                 .map(WalletMapper.INSTANCE::getWalletModelFromRequest)
+                .flatMap(walletModel -> {
+                    walletModel.setCreatedAt(LocalDate.now());
+                    walletModel.setUpdatedAt(LocalDate.now());
+                    return Single.just(walletModel);
+                })
                 .doOnSubscribe(disposable -> log.info("Subscribed to yanki wallet request"))
                 .flatMap(walletModel -> RxJava3Adapter.monoToSingle(daoWalletFactory.getWalletRepository().save(walletModel))
                         .doOnSubscribe(disposable -> log.info("Subscribed to yanki wallet respose"))
