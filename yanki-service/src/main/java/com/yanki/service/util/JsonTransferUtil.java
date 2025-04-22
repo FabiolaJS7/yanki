@@ -1,4 +1,4 @@
-package com.yanki.users.service.api.util;
+package com.yanki.service.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
