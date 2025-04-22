@@ -217,6 +217,36 @@ services:
     depends_on:
       - kafka
 
+  wallet-service-api:
+    build:
+      context: ../Yanki/wallet-service-api
+      dockerfile: Dockerfile
+    container_name: wallet-service-api
+    networks:
+      - app-network
+    ports:
+      - "9292:9292" # Mapea el puerto del contenedor al host
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Configura el perfil activo de Spring
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - kafka
+
+  movements-service-api:
+    build:
+      context: ../Yanki/movements-service-api
+      dockerfile: Dockerfile
+    container_name: movements-service-api
+    networks:
+      - app-network
+    ports:
+      - "9393:9393" # Mapea el puerto del contenedor al host
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Configura el perfil activo de Spring
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - kafka
+
 networks:
   app-network:
     driver: bridge
