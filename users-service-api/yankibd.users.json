@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "680689856ad59048c88a56fd"
+  },
+  "name": "LUIS",
+  "lastName": "NAVARRO",
+  "phoneNumber": "948976789",
+  "imeiNumber": "1231231231312312",
+  "password": "123456789",
+  "email": "luis@gmail.com",
+  "_class": "com.yanki.users.service.api.model.UserModel"
+},
+{
+  "_id": {
+    "$oid": "680816000823ac0fdb6d0e09"
+  },
+  "identificationType": "DNI",
+  "identificationNumber": "45494155",
+  "name": "FABIOLA",
+  "lastName": "GARCIA",
+  "phoneNumber": "987689098",
+  "imeiNumber": "123123123123",
+  "password": "123456789",
+  "email": "fabiola@mail.com",
+  "createdAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "_class": "com.yanki.users.service.api.model.UserModel"
+},
+{
+  "_id": {
+    "$oid": "6808163e0823ac0fdb6d0e0a"
+  },
+  "identificationType": "DNI",
+  "identificationNumber": "45679877",
+  "name": "MARIA",
+  "lastName": "MENDOZA",
+  "phoneNumber": "987683398",
+  "imeiNumber": "123123123123",
+  "password": "123456789",
+  "email": "maria@mail.com",
+  "createdAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "_class": "com.yanki.users.service.api.model.UserModel"
+}]

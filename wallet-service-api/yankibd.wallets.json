@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "68080d00965b354c885bc177"
+  },
+  "userId": "948976789",
+  "totalAmount": 0,
+  "createdAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+},
+{
+  "_id": {
+    "$oid": "68081600965b354c885bc178"
+  },
+  "userId": "987689098",
+  "totalAmount": 0,
+  "createdAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+},
+{
+  "_id": {
+    "$oid": "6808163e965b354c885bc179"
+  },
+  "userId": "987683398",
+  "totalAmount": 0,
+  "createdAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+}]
