@@ -247,6 +247,23 @@ services:
     depends_on:
       - kafka
 
+  cache:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    networks:
+      - app-network
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass 1234567
+    volumes:
+      - cache:/data
+
+
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  cache:
+    driver: local
