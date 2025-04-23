@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "68087bd4b7a360732c043ae3"
+  },
+  "walletIdTo": "987621116",
+  "walletIdFrom": "987622316",
+  "amount": 20,
+  "createdAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "_class": "com.yanki.movements.service.api.model.MovementModel"
+}]

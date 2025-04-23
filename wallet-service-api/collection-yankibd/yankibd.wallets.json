@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "68086557c923c127ed56d491"
+  },
+  "phoneAsWalletId": "987683311",
+  "totalAmount": 1000,
+  "createdAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+},
+{
+  "_id": {
+    "$oid": "68086684c923c127ed56d492"
+  },
+  "phoneAsWalletId": "987622311",
+  "totalAmount": 0,
+  "createdAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+},
+{
+  "_id": {
+    "$oid": "68086f83c923c127ed56d494"
+  },
+  "phoneAsWalletId": "987622316",
+  "totalAmount": 120,
+  "createdAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+},
+{
+  "_id": {
+    "$oid": "6808710cc923c127ed56d496"
+  },
+  "phoneAsWalletId": "987621116",
+  "totalAmount": 80,
+  "createdAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "_class": "com.yanki.wallet.service.api.model.WalletModel"
+}]
