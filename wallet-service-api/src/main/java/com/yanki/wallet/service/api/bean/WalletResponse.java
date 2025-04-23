@@ -16,7 +16,7 @@ public class WalletResponse {
 
     @Id
     private String id;
-    private String userId;
+    private String phoneAsWalletId;
     private Double totalAmount;
     private String productIdAssociated;
     private LocalDate createdAt;

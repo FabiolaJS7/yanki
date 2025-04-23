@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface UserService {
 
-    Single<String> createUser(YankiUserRequest userData);
+    Single<String> createUser(Single<YankiUserRequest> userData);
 }

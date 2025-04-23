@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single;
 
 public interface MovementService {
 
-    Single<String> createMovement(MovementRequest movementRequest);
+    Single<String> createMovement(Single<MovementRequest> movementRequest);
 }

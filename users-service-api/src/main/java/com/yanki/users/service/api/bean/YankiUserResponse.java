@@ -22,6 +22,7 @@ public class YankiUserResponse {
     private String imeiNumber;
     private String password;
     private String email;
+    private String result;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 

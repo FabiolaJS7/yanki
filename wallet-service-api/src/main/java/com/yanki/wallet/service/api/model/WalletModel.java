@@ -18,7 +18,7 @@ public class WalletModel {
 
     @Id
     private String id;
-    private String userId;
+    private String phoneAsWalletId; // será el celular como identificador del usuario
     private Double totalAmount;
     private String productIdAssociated;
     private LocalDate createdAt;

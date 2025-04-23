@@ -13,9 +13,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class WalletRequest {
 
-    private String userId;
+    private String phoneAsWalletId;
     private Double totalAmount;
     private String productIdAssociated;
+    private String movementType;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 

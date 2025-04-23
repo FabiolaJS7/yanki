@@ -19,13 +19,14 @@ public class YankiWalletConsumer {
 
     @KafkaListener(topics = "yanki-wallet", groupId = "user_group")
     public void createWallet(String message) {
-        log.info("Creation wallet recepted: {}", message);
+        log.info("Creation wallet arrived: {}", message);
         WalletRequest walletRequest = JsonTransferUtil.jsonToObject(message, WalletRequest.class);
 
-         walletService.createWallet(Single.just(walletRequest))
-                 .doOnSuccess(walletResponse -> log.info("Wallet created: {}",
-                         JsonTransferUtil.objectToJson(walletResponse)))
-                 .subscribe();
+        walletService.createOrUpdateWallet(Single.just(walletRequest))
+                .doOnSuccess(walletResponse -> log.info("Wallet created: {}",
+                        JsonTransferUtil.objectToJson(walletResponse)))
+                .doOnError(throwable -> log.error("Error processing wallet creation: {}", throwable.getMessage()))
+                .subscribe();
 
     }
 }

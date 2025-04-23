@@ -18,8 +18,8 @@ public class YankiMovementConsumer {
     MovementService movementService;
 
     @KafkaListener(topics = "yanki-movement", groupId = "user_group")
-    public void createWallet(String message) {
-        log.info("Creation movement recepted: {}", message);
+    public void createMovement(String message) {
+        log.info("Creation movement arrived: {}", message);
         MovementRequest movementRequest = JsonTransferUtil.jsonToObject(message, MovementRequest.class);
 
         movementService.createMovement(Single.just(movementRequest))
