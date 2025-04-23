@@ -259,6 +259,21 @@ services:
     volumes:
       - cache:/data
 
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "9004:9004"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
+
 
 networks:
   app-network:
