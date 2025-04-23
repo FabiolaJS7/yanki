@@ -9,7 +9,7 @@
 
     <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>
-            service-finance.log
+            movement-finance-api.log
         </file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>movements-service-api-%d{yyyy-MM-dd}.%i.log</fileNamePattern>

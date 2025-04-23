@@ -211,6 +211,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.10</version> <!-- Usa la última versión disponible -->
+				<configuration>
+					<excludes>
+						<exclude>com/yanki/movements/service/api/util/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
