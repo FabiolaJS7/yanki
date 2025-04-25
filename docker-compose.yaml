@@ -1,7 +1,7 @@
 services:
   discovery-service:
     build:
-      context: ./discovery-service # Ruta donde está el Dockerfile del config-server
+      context: ../Bank/discovery-service # Ruta donde está el Dockerfile del config-server
       dockerfile: Dockerfile
     container_name: discovery-service
     ports:
@@ -15,7 +15,7 @@ services:
 
   config-server-bc:
     build:
-      context: ./config-server-bc # Ruta donde está el Dockerfile del config-server
+      context: ../Bank/config-server-bc # Ruta donde está el Dockerfile del config-server
       dockerfile: Dockerfile
     container_name: config-server-bc
     ports:
@@ -30,7 +30,7 @@ services:
 
   api-gateway:
     build:
-      context: ./api-gateway
+      context: ../Bank/api-gateway
       dockerfile: Dockerfile
     container_name: api-gateway
     ports:
@@ -46,7 +46,7 @@ services:
 
   business-service:
     build:
-      context: ./business-service
+      context: ../Bank/business-service
       dockerfile: Dockerfile
     container_name: business-service
     ports:
@@ -55,15 +55,15 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
+      - service-product
+      - service-customer
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
   service-product:
     build:
-      context: ./service-product
+      context: ../Bank/service-product
       dockerfile: Dockerfile
     container_name: service-product
     ports:
@@ -72,15 +72,13 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
   service-customer:
     build:
-      context: ./service-customer
+      context: ../Bank/service-customer
       dockerfile: Dockerfile
     container_name: service-customer
     ports:
@@ -89,15 +87,13 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
   service-transaction:
     build:
-      context: ./service-transaction
+      context: ../Bank/service-transaction
       dockerfile: Dockerfile
     container_name: service-transaction
     ports:
@@ -106,15 +102,13 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
   service-finance:
     build:
-      context: ./service-finance
+      context: ../Bank/service-finance
       dockerfile: Dockerfile
     container_name: service-finance
     ports:
@@ -123,15 +117,13 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
   resume-balance-bot:
     build:
-      context: ./resume-balance-bot
+      context: ../Bank/resume-balance-bot
       dockerfile: Dockerfile
     container_name: resume-balance-bot
     ports:
@@ -140,8 +132,8 @@ services:
       - app-network
     depends_on:
       - config-server-bc
-      - discovery-service
-      - api-gateway
+      - service-finance
+      - service-product
     environment:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
@@ -188,7 +180,7 @@ services:
 
   yanki-service:
     build:
-      context: ../Yanki/yanki-service
+      context: ./yanki-service
       dockerfile: Dockerfile
     container_name: yanki-service
     networks:
@@ -204,7 +196,7 @@ services:
 
   users-service-api:
     build:
-      context: ../Yanki/users-service-api
+      context: ./users-service-api
       dockerfile: Dockerfile
     container_name: users-service-api
     networks:
@@ -219,7 +211,7 @@ services:
 
   wallet-service-api:
     build:
-      context: ../Yanki/wallet-service-api
+      context: ./wallet-service-api
       dockerfile: Dockerfile
     container_name: wallet-service-api
     networks:
@@ -234,7 +226,7 @@ services:
 
   movements-service-api:
     build:
-      context: ../Yanki/movements-service-api
+      context: ./movements-service-api
       dockerfile: Dockerfile
     container_name: movements-service-api
     networks:
@@ -261,7 +253,7 @@ services:
 
   auth-service:
     build:
-      context: ./auth-service
+      context: ../Bank/auth-service
       dockerfile: Dockerfile
     container_name: auth-service
     ports:
