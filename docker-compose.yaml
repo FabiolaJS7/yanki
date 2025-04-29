@@ -266,6 +266,96 @@ services:
       SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/ # Apunta al discovery-service
 
+  bootcoin-user-api:
+    build:
+      context: ../BootCoin/bootcoin-user-api
+      dockerfile: Dockerfile
+    container_name: bootcoin-user-api
+    ports:
+      - "8817:8817"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+      - kafka
+      - config-server-bc
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  exchange-bootcoin-api:
+    build:
+      context: ../BootCoin/exchange-bootcoin-api
+      dockerfile: Dockerfile
+    container_name: exchange-bootcoin-api
+    ports:
+      - "8809:8809"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+      - kafka
+      - config-server-bc
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  p2p-bootcoin-api:
+    build:
+      context: ../BootCoin/p2p-bootcoin-service
+      dockerfile: Dockerfile
+    container_name: p2p-bootcoin-service
+    ports:
+      - "8803:8803"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+      - kafka
+      - config-server-bc
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  transaction-bootcoin-api:
+    build:
+      context: ../BootCoin/transaction-bootcoin-api
+      dockerfile: Dockerfile
+    container_name: transaction-bootcoin-api
+    ports:
+      - "8807:8807"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+      - kafka
+      - config-server-bc
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  wallet-bootcoin-api:
+    build:
+      context: ../BootCoin/wallet-bootcoin-api
+      dockerfile: Dockerfile
+    container_name: wallet-bootcoin-api
+    ports:
+      - "8805:8805"
+    networks:
+      - app-network
+    depends_on:
+      - discovery-service
+      - kafka
+      - config-server-bc
+    environment:
+      SPRING_PROFILES_ACTIVE: local # Perfil activo en application.properties
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://discovery-service:8761/eureka/
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
 
 networks:
   app-network:
